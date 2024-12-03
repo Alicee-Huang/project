@@ -313,7 +313,44 @@ def create_recommend_page(page_frame):
                       bg="skyblue", fg="black")
     message.pack(pady=20)
 
+    action_label = tk.Label(recommend_page_frame,
+                            text="生成的動作清單：",
+                            font=("微軟正黑體", 15),
+                            bg="skyblue", fg="black")
+    action_label.pack(pady=10)
+
+    action_list = generate_action_list()
+    action_text = tk.Label(recommend_page_frame,
+                           text="\n".join(action_list),
+                           font=("微軟正黑體", 13),
+                           bg="skyblue", fg="black")
+    action_text.pack(pady=10)
+
+    # 是否加入自訂清單
+    custom_label = tk.Label(recommend_page_frame,
+                            text="是否加入自訂清單？",
+                            font=("微軟正黑體", 15),
+                            bg="skyblue", fg="black")
+    custom_label.pack(pady=10)
+
+    # 按鈕一：加入
+    add_button = tk.Button(recommend_page_frame,
+                           text="加入",
+                           font=("微軟正黑體", 12, "bold"),
+                           bg="lightgreen", fg="black",
+                           command=lambda: add_to_custom_list(action_list))
+    add_button.pack(side=tk.LEFT, padx=20)
+
+    # 按鈕二：重新生成
+    regenerate_button = tk.Button(recommend_page_frame,
+                                  text="重新生成",
+                                  font=("微軟正黑體", 12, "bold"),
+                                  bg="lightcoral", fg="black",
+                                  command=lambda: create_recommend_page(page_frame))
+    regenerate_button.pack(side=tk.RIGHT, padx=20)
+
     recommend_page_frame.pack(fill="both", expand=1)
+    
 
 # 頁面配置字典
 PAGE_CONFIG = {
